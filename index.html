@@ -111,7 +111,7 @@
 </footer>
 
 <!-- Importa a lista de produtos -->
-<script src="produtos_dados.js"></script>
+<script src="produtos_dados.js" charset="utf-8"></script>
 
 <script>
   function carregarProdutos() {
@@ -125,20 +125,16 @@
 
       container.innerHTML = ''; // Limpa o container antes de carregar
 
-      listaProdutos.forEach((img, index) => {
+      listaProdutos.forEach((produto) => {
         const productDiv = document.createElement('div');
         productDiv.className = 'product';
         
-        const productName = img.split('.')[0]
-          .replace('Modelo', 'Produto ')
-          .replace('modelo', 'Produto ')
-          .replace(/(\d+)/, ' $1') // Adiciona espaço antes de números
-          .trim();
+        const productName = produto.nome || produto.imagem;
 
         productDiv.innerHTML = `
-          <img src="produtos/${img}" alt="${productName}">
+          <img src="produtos/${produto.imagem}" alt="${productName}">
           <h3>${productName}</h3>
-          <p class="price">R$ ${((index + 1) * 10 + 39.90).toFixed(2).replace('.', ',')}</p>
+          <p class="price">R$ ${produto.preco.toFixed(2).replace('.', ',')}</p>
           <button onclick="comprar('${productName}')">Comprar</button>
         `;
         
