@@ -33,5 +33,10 @@ const listaProdutos = [
         "imagem":  "Dinosauro.webp",
         "preco":  5.5,
         "nome":  "Dinosauro"
+    },
+    {
+        "imagem":  "feminina.webp",
+        "preco":  12,
+        "nome":  "feminina"
     }
 ];
