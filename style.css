@@ -101,6 +101,48 @@ h2 {
   font-weight: bold;
 }
 
+/* Tabela de Tamanhos */
+.size-table {
+  margin: 20px 0;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+.size-table h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.1em;
+  color: #333;
+}
+
+.size-info {
+  font-size: 0.85em;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.size-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9em;
+}
+
+.size-table th,
+.size-table td {
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.size-table th {
+  background: #111;
+  color: white;
+}
+
+.size-table tr:last-child td {
+  border-bottom: none;
+}
+
 button {
   background: #111;
   color: white;
