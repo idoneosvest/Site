@@ -90,7 +90,8 @@ while ($true) {
     $opcao = Read-Host "Escolha uma opcao"
     
     if ($opcao -eq 'S') {
-        $json = $listaFinal | ConvertTo-Json -Depth 4
+        # Garante que sempre será um array, mesmo com 1 elemento
+        $json = @($listaFinal) | ConvertTo-Json -Depth 4
         $conteudoFinal = "const listaProdutos = $json;"
         [System.IO.File]::WriteAllText($caminhoDados, $conteudoFinal, (New-Object System.Text.UTF8Encoding($false)))
         Write-Host "Salvo com sucesso!" -ForegroundColor Green; Start-Sleep 1; break

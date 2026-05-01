@@ -73,7 +73,9 @@ async function main() {
     const opt = (await question("Escolha: ")).toUpperCase();
 
     if (opt === 'S') {
-      const content = `const listaProdutos = ${JSON.stringify(listaProdutos, null, 2)};`;
+      // Garante que sempre será um array, mesmo com 1 elemento
+      const json = JSON.stringify(listaProdutos, null, 2);
+      const content = `const listaProdutos = ${json};`;
       fs.writeFileSync(outputFile, content, 'utf8');
       console.log("Salvo!");
       break;
