@@ -51,13 +51,15 @@
         const productDiv = document.createElement('div');
         productDiv.className = 'product';
         
-        const productName = produto.nome || produto.imagens[0];
+        const productName = produto.nome || produto.principal;
 
         productDiv.innerHTML = `
-          <a href="detalhes.html?id=${index}" style="text-decoration: none; color: inherit;">
+          <a href="detalhes.html?id=${index}" class="product-link">
             <img src="produtos/${produto.principal}" alt="${productName}">
-            <h3>${productName}</h3>
-            <p class="price">R$ ${produto.preco.toFixed(2).replace('.', ',')}</p>
+            <div class="product-info">
+              <h3>${productName}</h3>
+              <p class="price">R$ ${produto.preco.toFixed(2).replace('.', ',')}</p>
+            </div>
           </a>
         `;
         
