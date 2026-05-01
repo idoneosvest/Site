@@ -54,7 +54,15 @@ async function main() {
         nome: base.replace('Modelo', 'Produto '),
         preco: 0.00,
         principal: f,
-        detalhes: detalhesFiles.filter(d => d.startsWith(base + '_detalhe'))
+        detalhes: detalhesFiles.filter(d => d.startsWith(base + '_detalhe')),
+        estoque: {
+          PP: 0,
+          P: 0,
+          M: 0,
+          G: 0,
+          GG: 0,
+          ExG: 0
+        }
       });
     }
   });

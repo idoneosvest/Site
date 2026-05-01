@@ -69,6 +69,14 @@ foreach ($img in $arquivosPrincipais) {
             preco = $preco
             principal = $img
             detalhes = [array]$detalhesEncontrados
+            estoque = @{
+                PP = 0
+                P = 0
+                M = 0
+                G = 0
+                GG = 0
+                ExG = 0
+            }
         }
     }
 }

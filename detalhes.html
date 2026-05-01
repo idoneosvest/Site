@@ -46,6 +46,7 @@
               <th>Tamanho</th>
               <th>Altura<br>Ombro até a barra (cm)</th>
               <th>Largura<br>Só largura da frente (cm)</th>
+              <th>Estoque</th>
             </tr>
           </thead>
           <tbody>
@@ -53,31 +54,37 @@
               <td>PP</td>
               <td>69</td>
               <td>49</td>
+              <td id="estoque-PP">-</td>
             </tr>
             <tr>
               <td>P</td>
               <td>70</td>
               <td>51</td>
+              <td id="estoque-P">-</td>
             </tr>
             <tr>
               <td>M</td>
               <td>71</td>
               <td>53</td>
+              <td id="estoque-M">-</td>
             </tr>
             <tr>
               <td>G</td>
               <td>74</td>
               <td>54</td>
+              <td id="estoque-G">-</td>
             </tr>
             <tr>
               <td>GG</td>
               <td>77</td>
               <td>58</td>
+              <td id="estoque-GG">-</td>
             </tr>
             <tr>
               <td>ExG</td>
               <td>79</td>
               <td>59</td>
+              <td id="estoque-ExG">-</td>
             </tr>
           </tbody>
         </table>
@@ -112,6 +119,18 @@
     document.title = `${produto.nome} - Idôneos`;
     document.getElementById('product-name').innerText = produto.nome;
     document.getElementById('product-price').innerText = `R$ ${produto.preco.toFixed(2).replace('.', ',')}`;
+
+    // Preencher estoque na tabela de tamanhos
+    const tamanhos = ['PP', 'P', 'M', 'G', 'GG', 'ExG'];
+    const estoque = produto.estoque || {};
+    tamanhos.forEach(t => {
+      const el = document.getElementById(`estoque-${t}`);
+      if (el) {
+        const qtd = estoque[t] !== undefined ? estoque[t] : 0;
+        el.innerText = qtd > 0 ? qtd : 'Esgotado';
+        el.style.color = qtd > 0 ? '#28a745' : '#dc3545';
+      }
+    });
 
     const carousel = document.getElementById('carousel');
     
