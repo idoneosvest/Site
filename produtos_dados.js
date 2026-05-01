@@ -18,5 +18,10 @@ const listaProdutos = [
         "imagem":  "modelo3.jfif",
         "preco":  69.9,
         "nome":  "Camiseta Vermelha"
+    },
+    {
+        "imagem":  "Jesus.webp",
+        "preco":  11,
+        "nome":  "Jesus is the Hope os the world"
     }
 ];
