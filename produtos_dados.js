@@ -1,8 +1,10 @@
 const listaProdutos = [
     {
-        "nome": "MeuCrush",
-        "preco": 0,
-        "principal": "MeuCrush.webp",
-        "detalhes": ["MeuCrush_detalhe1.webp"]
+        "nome": "shopping",
+        "preco": 12.5,
+        "principal": "shopping.webp",
+        "detalhes": [
+            "shopping_detalhes1.webp"
+        ]
     }
 ];

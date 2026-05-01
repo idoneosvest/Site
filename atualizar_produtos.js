@@ -18,7 +18,8 @@ async function main() {
 
   if (fs.existsSync(outputFile)) {
     const content = fs.readFileSync(outputFile, 'utf8');
-    const match = content.match(/const listaProdutos = (\[[\s\S]*?\]);/);
+    // Captura tanto [] quanto {}
+    const match = content.match(/const listaProdutos = (\{[\s\S]*\}|\[[\s\S]*?\]);/);
     if (match) {
       try {
         const parsed = JSON.parse(match[1]);
