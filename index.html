@@ -57,7 +57,6 @@
           <img src="produtos/${produto.imagem}" alt="${productName}">
           <h3>${productName}</h3>
           <p class="price">R$ ${produto.preco.toFixed(2).replace('.', ',')}</p>
-          <button onclick="comprar('${productName}')">Comprar</button>
         `;
         
         container.appendChild(productDiv);
@@ -66,10 +65,6 @@
       console.error('Erro ao carregar produtos:', error);
       container.innerHTML = '<p>Erro ao carregar os produtos.</p>';
     }
-  }
-
-  function comprar(produto) {
-    alert("Você escolheu: " + produto);
   }
 
   // Carregamento dinâmico com anti-cache
