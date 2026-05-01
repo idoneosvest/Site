@@ -1,7 +1,7 @@
 const listaProdutos = [
     {
         "nome":  "Nós Amamos Porque Ele Nos Amou Primeiro",
-        "preco":  20,
+        "preco":  65,
         "principal":  "NosAmamosPorqueEleNosAmouPrimeiro_azul.jpg",
         "detalhes":  [
                          "NosAmamosPorqueEleNosAmouPrimeiro_azul_detalhes1.jpeg"
@@ -17,7 +17,7 @@ const listaProdutos = [
     },
     {
         "nome":  "Remidos e Restaurados",
-        "preco":  25,
+        "preco":  65,
         "principal":  "RemidosERestaurados_branca.jpg",
         "detalhes":  [
                          "RemidosERestaurados_branca_detalhes.jpeg"
@@ -33,7 +33,7 @@ const listaProdutos = [
     },
     {
         "nome":  "Remidos e Restaurados",
-        "preco":  22,
+        "preco":  65,
         "principal":  "RemidosERestaurados_azul.jpg",
         "detalhes":  [
                          "RemidosERestaurados_azul_detalhes1.jpg"
@@ -49,7 +49,7 @@ const listaProdutos = [
     },
     {
         "nome":  "Rogovos pois irmãos",
-        "preco":  23,
+        "preco":  65,
         "principal":  "RogovosPoisirmaos_braca.jpg",
         "detalhes":  [
                          "RogovosPoisirmaos_braca_detalhes1.jpg"
@@ -65,7 +65,7 @@ const listaProdutos = [
     },
     {
         "nome":  "Pescadores de Homens",
-        "preco":  23,
+        "preco":  65,
         "principal":  "PescadoresDeHomens_azul.jpg",
         "detalhes":  [
                          "PescadoresDeHomens_azul_detalhes1.jpg"
