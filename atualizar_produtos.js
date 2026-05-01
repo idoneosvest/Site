@@ -2,7 +2,12 @@ const fs = require('fs');
 const path = require('path');
 
 const produtosDir = path.join(__dirname, 'produtos');
+const detalhesDir = path.join(produtosDir, 'detalhes');
 const outputFile = path.join(__dirname, 'produtos_dados.js');
+
+if (!fs.existsSync(detalhesDir)) {
+  fs.mkdirSync(detalhesDir);
+}
 
 let produtosExistentes = {};
 
@@ -13,10 +18,8 @@ if (fs.existsSync(outputFile)) {
     try {
       const json = JSON.parse(match[1]);
       json.forEach(p => {
-        // Suporta tanto o formato antigo (string) quanto o novo (array)
-        const key = Array.isArray(p.imagens) ? p.imagens[0] : (p.imagem || '');
-        if (key) {
-          produtosExistentes[key] = p;
+        if (p.principal) {
+          produtosExistentes[p.principal] = p;
         }
       });
     } catch (e) {
@@ -26,18 +29,24 @@ if (fs.existsSync(outputFile)) {
 }
 
 try {
-  const files = fs.readdirSync(produtosDir).filter(file => {
+  const principalFiles = fs.readdirSync(produtosDir).filter(file => {
     return ['.jpg', '.jpeg', '.png', '.gif', '.jfif', '.webp'].includes(path.extname(file).toLowerCase());
   });
 
-  const newList = files.map(file => {
+  const detalhesFiles = fs.readdirSync(detalhesDir).filter(file => {
+    return ['.jpg', '.jpeg', '.png', '.gif', '.jfif', '.webp'].includes(path.extname(file).toLowerCase());
+  });
+
+  const newList = principalFiles.map(file => {
     if (produtosExistentes[file]) {
       const p = produtosExistentes[file];
-      // Garante que o formato final seja com 'imagens' (array)
+      // Filtra detalhes que ainda existem na subpasta
+      const validDetails = (p.detalhes || []).filter(d => detalhesFiles.includes(d));
       return {
-        imagens: Array.isArray(p.imagens) ? p.imagens : [p.imagem || file],
+        nome: p.nome || file.split('.')[0],
         preco: p.preco || 0.00,
-        nome: p.nome || file.split('.')[0]
+        principal: file,
+        detalhes: validDetails
       };
     } else {
       const defaultName = file.split('.')[0]
@@ -45,16 +54,17 @@ try {
         .replace('modelo', 'Produto ')
         .trim();
       return {
-        imagens: [file],
+        nome: defaultName,
         preco: 0.00,
-        nome: defaultName
+        principal: file,
+        detalhes: []
       };
     }
   });
 
   const finalContent = `const listaProdutos = ${JSON.stringify(newList, null, 2)};`;
   fs.writeFileSync(outputFile, finalContent);
-  console.log('produtos_dados.js atualizado com sucesso (Modo Carrossel)!');
+  console.log('produtos_dados.js atualizado com sucesso (Detalhes em Subpasta)!');
 } catch (err) {
   console.error('Erro ao atualizar produtos_dados.js:', err);
 }
