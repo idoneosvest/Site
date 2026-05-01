@@ -66,13 +66,23 @@
     document.getElementById('product-price').innerText = `R$ ${produto.preco.toFixed(2).replace('.', ',')}`;
 
     const carousel = document.getElementById('carousel');
-    imagensProduto.forEach((img, i) => {
+    
+    // Adiciona a imagem principal
+    const imgPrincipal = document.createElement('img');
+    imgPrincipal.src = `produtos/${produto.principal}`;
+    imgPrincipal.alt = `${produto.nome} - Principal`;
+    imgPrincipal.classList.add('active');
+    carousel.appendChild(imgPrincipal);
+
+    // Adiciona as imagens de detalhes
+    produto.detalhes.forEach((img, i) => {
       const imgElement = document.createElement('img');
-      imgElement.src = `produtos/${img}`;
-      imgElement.alt = `${produto.nome} - Imagem ${i + 1}`;
-      if (i === 0) imgElement.classList.add('active');
+      imgElement.src = `produtos/detalhes/${img}`;
+      imgElement.alt = `${produto.nome} - Detalhe ${i + 1}`;
       carousel.appendChild(imgElement);
     });
+
+    imagensProduto = [produto.principal, ...produto.detalhes]; // Mantém para o controle do índice
 
     if (imagensProduto.length <= 1) {
       document.querySelector('.prev').style.display = 'none';
