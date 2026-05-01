@@ -23,5 +23,10 @@ const listaProdutos = [
         "imagem":  "Jesus.webp",
         "preco":  11,
         "nome":  "Jesus is the Hope os the world"
+    },
+    {
+        "imagem":  "Gato.webp",
+        "preco":  3,
+        "nome":  "Gato"
     }
 ];
