@@ -30,20 +30,16 @@
   © 2026 Idôneos - Todos os direitos reservados
 </footer>
 
-<!-- Importa a lista de produtos -->
-<script src="produtos_dados.js" charset="utf-8"></script>
-
 <script>
   function carregarProdutos() {
     const container = document.getElementById('product-container');
     
     try {
-      // listaProdutos vem do arquivo produtos_dados.js
       if (typeof listaProdutos === 'undefined') {
         throw new Error('A variável listaProdutos não foi encontrada.');
       }
 
-      container.innerHTML = ''; // Limpa o container antes de carregar
+      container.innerHTML = ''; 
 
       listaProdutos.forEach((produto) => {
         const productDiv = document.createElement('div');
@@ -62,16 +58,20 @@
       });
     } catch (error) {
       console.error('Erro ao carregar produtos:', error);
-      container.innerHTML = '<p>Erro ao carregar os produtos. Verifique se o arquivo produtos_dados.js existe.</p>';
+      container.innerHTML = '<p>Erro ao carregar os produtos.</p>';
     }
   }
-
-  // Chama a função ao carregar a página
-  carregarProdutos();
 
   function comprar(produto) {
     alert("Você escolheu: " + produto);
   }
+
+  // Carregamento dinâmico com anti-cache
+  const script = document.createElement('script');
+  script.src = 'produtos_dados.js?v=' + Date.now();
+  script.charset = 'utf-8';
+  script.onload = carregarProdutos;
+  document.head.appendChild(script);
 </script>
 
 </body>
