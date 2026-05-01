@@ -36,7 +36,7 @@ const listaProdutos = [
     },
     {
         "imagem":  "feminina.webp",
-        "preco":  12,
-        "nome":  "feminina"
+        "preco":  13,
+        "nome":  "Camiseta Feminina"
     }
 ];
