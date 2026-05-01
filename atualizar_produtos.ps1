@@ -7,10 +7,18 @@ $produtos = @()
 # 1. Carregar dados existentes
 if (Test-Path $caminhoDados) {
     $conteudoAtual = [System.IO.File]::ReadAllText($caminhoDados, [System.Text.Encoding]::UTF8)
-    if ($conteudoAtual -match 'const listaProdutos = (\[[\s\S]*\]);') {
+    if ($conteudoAtual -match 'const listaProdutos = (\[[\s\S]*?\]);') {
         try {
-            $produtos = $matches[1] | ConvertFrom-Json
-        } catch {}
+            $parsed = $matches[1] | ConvertFrom-Json
+            # Garante que é um array
+            if ($parsed -is [System.Array]) {
+                $produtos = $parsed
+            } else {
+                $produtos = @()
+            }
+        } catch {
+            $produtos = @()
+        }
     }
 }
 

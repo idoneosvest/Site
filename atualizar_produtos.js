@@ -18,11 +18,15 @@ async function main() {
 
   if (fs.existsSync(outputFile)) {
     const content = fs.readFileSync(outputFile, 'utf8');
-    const match = content.match(/const listaProdutos = (\[[\s\S]*\]);/);
+    const match = content.match(/const listaProdutos = (\[[\s\S]*?\]);/);
     if (match) {
       try {
-        listaProdutos = JSON.parse(match[1]);
-      } catch (e) {}
+        const parsed = JSON.parse(match[1]);
+        // Garante que é um array
+        listaProdutos = Array.isArray(parsed) ? parsed : [];
+      } catch (e) {
+        listaProdutos = [];
+      }
     }
   }
 
