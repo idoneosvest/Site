@@ -38,5 +38,10 @@ const listaProdutos = [
         "imagem":  "feminina.webp",
         "preco":  13,
         "nome":  "Camiseta Feminina"
+    },
+    {
+        "imagem":  "Pink Floyd.webp",
+        "preco":  33,
+        "nome":  "Pink Floyd"
     }
 ];
