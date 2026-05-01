@@ -19,19 +19,19 @@ header h1 {
 }
 
 header h1 img {
-  width: 70px; /* Aumentado para 80px */
+  width: 80px; /* Corrigido para 80px */
   height: auto;
   margin-right: 15px;
 }
 
 .banner {
   background: url('https://via.placeholder.com/1200x300') no-repeat center/cover;
-  height: 80px; /* Reduzido de 120px para 80px */
+  height: 80px; 
   display: flex;
   align-items: center;
   justify-content: center;
   color: rgb(45, 10, 245);
-  font-size: 1.8em; /* Aumentado de 1.4em para 1.8em */
+  font-size: 1.8em; 
   font-weight: bold;
 }
 
@@ -42,8 +42,8 @@ header h1 img {
 }
 
 h2 {
-  margin-top: 0; /* Zerado */
-  margin-bottom: 5px; /* Espaço mínimo para a grade */
+  margin-top: 0; 
+  margin-bottom: 5px; 
   font-size: 1.3em;
 }
 
@@ -71,7 +71,7 @@ h2 {
 }
 
 .product h3 {
-  margin: auto 0 10px 0; /* 'auto' no topo empurra todo o bloco de texto para baixo */
+  margin: auto 0 10px 0; 
   font-size: 1.1em;
   min-height: 2.4em;
   display: flex;
@@ -135,9 +135,9 @@ button:hover {
 
 .carousel img {
   display: none;
-  width: 100%;
+  width: 100%; /* Força a ampliação para preencher o container */
   height: 100%;
-  object-fit: cover; /* Faz a imagem preencher todo o frame (pode cortar levemente as bordas se a proporção for diferente) */
+  object-fit: contain; /* Garante que a imagem apareça inteira sem cortes */
 }
 
 .carousel img.active {
@@ -148,23 +148,24 @@ button:hover {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.2); /* Mais discreto para não tampar a foto */
   color: white;
   border: none;
-  padding: 10px 15px;
+  padding: 20px 10px;
   cursor: pointer;
-  border-radius: 5px;
-  font-size: 1.2em;
-  transition: background 0.3s;
-  width: auto; /* Sobrescreve o width: 100% dos botões gerais */
+  border-radius: 3px;
+  font-size: 1.5em;
+  transition: all 0.3s;
+  width: auto;
+  z-index: 10;
 }
 
 .carousel-btn:hover {
-  background: rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.6);
 }
 
-.prev { left: 10px; }
-.next { right: 10px; }
+.prev { left: 0; }
+.next { right: 0; }
 
 .product-info-details h2 {
   font-size: 2em;

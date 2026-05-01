@@ -58,7 +58,8 @@
     }
 
     const produto = listaProdutos[id];
-    imagensProduto = produto.imagens;
+    // Combina a principal com os detalhes em uma única lista para o carrossel
+    imagensProduto = [produto.principal, ...produto.detalhes];
 
     document.title = `${produto.nome} - Idôneos`;
     document.getElementById('product-name').innerText = produto.nome;

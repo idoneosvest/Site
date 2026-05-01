@@ -1,47 +1,92 @@
 const listaProdutos = [
     {
-        "imagens": ["download.webp"],
-        "preco": 23.3,
-        "nome": "Camisa Japonesa"
+        "nome":  "Camisa Japonesa",
+        "preco":  23.3,
+        "principal":  "download.webp",
+        "detalhes":  [
+                         "download_detalhe1.webp",
+                         "download_detalhe2.webp",
+                         "download_detalhe3.webp"
+                     ]
     },
     {
-        "imagens": ["Modelo1.jfif"],
-        "preco": 49.9,
-        "nome": "Camiseta Básica Preta"
+        "nome":  "Camiseta BÃ¡sica Preta",
+        "preco":  49.9,
+        "principal":  "Modelo1.jfif",
+        "detalhes":  [
+                         "Modelo1_detalhe1.jfif",
+                         "Modelo1_detalhe2.jfif",
+                         "Modelo1_detalhe3.jfif"
+                     ]
     },
     {
-        "imagens": ["modelo2.jfif"],
-        "preco": 59.9,
-        "nome": "Camiseta Azul Premium"
+        "nome":  "Camiseta Azul Premium",
+        "preco":  59.9,
+        "principal":  "modelo2.jfif",
+        "detalhes":  [
+                         "modelo2_detalhe1.jfif",
+                         "modelo2_detalhe2.jfif",
+                         "modelo2_detalhe3.jfif"
+                     ]
     },
     {
-        "imagens": ["modelo3.jfif"],
-        "preco": 69.9,
-        "nome": "Camiseta Vermelha"
+        "nome":  "Camiseta Vermelha",
+        "preco":  69.9,
+        "principal":  "modelo3.jfif",
+        "detalhes":  [
+                         "modelo3_detalhe1.jfif",
+                         "modelo3_detalhe2.jfif",
+                         "modelo3_detalhe3.jfif"
+                     ]
     },
     {
-        "imagens": ["Jesus.webp"],
-        "preco": 11,
-        "nome": "Jesus is the Hope os the world"
+        "nome":  "Jesus is the Hope os the world",
+        "preco":  11,
+        "principal":  "Jesus.webp",
+        "detalhes":  [
+                         "Jesus_detalhe1.webp",
+                         "Jesus_detalhe2.webp",
+                         "Jesus_detalhe3.webp"
+                     ]
     },
     {
-        "imagens": ["Gato.webp"],
-        "preco": 3,
-        "nome": "Gato"
+        "nome":  "Gato",
+        "preco":  3,
+        "principal":  "Gato.webp",
+        "detalhes":  [
+                         "Gato_detalhe1.webp",
+                         "Gato_detalhe2.webp",
+                         "Gato_detalhe3.webp"
+                     ]
     },
     {
-        "imagens": ["Dinosauro.webp"],
-        "preco": 5.5,
-        "nome": "Dinosauro"
+        "nome":  "Dinosauro",
+        "preco":  5.5,
+        "principal":  "Dinosauro.webp",
+        "detalhes":  [
+                         "Dinosauro_detalhe1.webp",
+                         "Dinosauro_detalhe2.webp",
+                         "Dinosauro_detalhe3.webp"
+                     ]
     },
     {
-        "imagens": ["feminina.webp"],
-        "preco": 13,
-        "nome": "Camiseta Feminina"
+        "nome":  "Camiseta Feminina",
+        "preco":  13,
+        "principal":  "feminina.webp",
+        "detalhes":  [
+                         "feminina_detalhe1.webp",
+                         "feminina_detalhe2.webp",
+                         "feminina_detalhe3.webp"
+                     ]
     },
     {
-        "imagens": ["Pink Floyd.webp"],
-        "preco": 33,
-        "nome": "Pink Floyd"
+        "nome":  "Pink Floyd",
+        "preco":  33,
+        "principal":  "Pink Floyd.webp",
+        "detalhes":  [
+                         "Pink Floyd_detalhe1.webp",
+                         "Pink Floyd_detalhe2.webp",
+                         "Pink Floyd_detalhe3.webp"
+                     ]
     }
 ];
