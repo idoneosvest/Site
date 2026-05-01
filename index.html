@@ -5,7 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Idôneos</title>
 
-  <link rel="stylesheet" href="style.css">
+  <script>
+    // Anti-cache para o CSS
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'style.css?v=' + Date.now();
+    document.head.appendChild(link);
+  </script>
 </head>
 <body>
 
