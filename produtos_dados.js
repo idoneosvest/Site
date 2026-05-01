@@ -57,7 +57,8 @@ const listaProdutos = [
         "detalhes":  [
                          "Gato_detalhe1.webp",
                          "Gato_detalhe2.webp",
-                         "Gato_detalhe3.webp"
+                         "Gato_detalhe3.webp",
+                         "Gato_detalhe4.jpg"
                      ]
     },
     {
