@@ -13,9 +13,15 @@ if (fs.existsSync(outputFile)) {
     try {
       const json = JSON.parse(match[1]);
       json.forEach(p => {
-        produtosExistentes[p.imagem] = p;
+        // Suporta tanto o formato antigo (string) quanto o novo (array)
+        const key = Array.isArray(p.imagens) ? p.imagens[0] : (p.imagem || '');
+        if (key) {
+          produtosExistentes[key] = p;
+        }
       });
-    } catch (e) {}
+    } catch (e) {
+      console.error('Erro ao ler produtos existentes:', e);
+    }
   }
 }
 
@@ -26,14 +32,20 @@ try {
 
   const newList = files.map(file => {
     if (produtosExistentes[file]) {
-      return produtosExistentes[file];
+      const p = produtosExistentes[file];
+      // Garante que o formato final seja com 'imagens' (array)
+      return {
+        imagens: Array.isArray(p.imagens) ? p.imagens : [p.imagem || file],
+        preco: p.preco || 0.00,
+        nome: p.nome || file.split('.')[0]
+      };
     } else {
       const defaultName = file.split('.')[0]
         .replace('Modelo', 'Produto ')
         .replace('modelo', 'Produto ')
         .trim();
       return {
-        imagem: file,
+        imagens: [file],
         preco: 0.00,
         nome: defaultName
       };
@@ -42,7 +54,7 @@ try {
 
   const finalContent = `const listaProdutos = ${JSON.stringify(newList, null, 2)};`;
   fs.writeFileSync(outputFile, finalContent);
-  console.log('produtos_dados.js atualizado! Novos itens com preco R$ 0,00 e nome padrao.');
+  console.log('produtos_dados.js atualizado com sucesso (Modo Carrossel)!');
 } catch (err) {
   console.error('Erro ao atualizar produtos_dados.js:', err);
 }

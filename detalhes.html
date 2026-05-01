@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalhes do Produto - Idôneos</title>
+  <script>
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'style.css?v=' + Date.now();
+    document.head.appendChild(link);
+  </script>
+</head>
+<body>
+
+<header>
+  <h1><a href="index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+    <img src="Logo/Idoneos128.ico" alt="logo"> Idôneos
+  </a></h1>
+</header>
+
+<div class="container">
+  <div class="product-details">
+    <div class="carousel-container">
+      <div class="carousel" id="carousel">
+        <!-- Imagens do carrosel serão inseridas aqui -->
+      </div>
+      <button class="carousel-btn prev" onclick="mudarImagem(-1)">&#10094;</button>
+      <button class="carousel-btn next" onclick="mudarImagem(1)">&#10095;</button>
+    </div>
+
+    <div class="product-info-details">
+      <h2 id="product-name">Nome do Produto</h2>
+      <p class="price" id="product-price">R$ 0,00</p>
+      <div class="description">
+        <p>Este é um produto de alta qualidade da Idôneos. Adequado para servir com estilo e conforto.</p>
+      </div>
+      <a href="index.html" class="back-btn">Voltar para a Vitrine</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  © 2026 Idôneos - Todos os direitos reservados
+</footer>
+
+<script>
+  let indexImagem = 0;
+  let imagensProduto = [];
+
+  function carregarDetalhes() {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+    
+    if (id === null || typeof listaProdutos === 'undefined' || !listaProdutos[id]) {
+      window.location.href = 'index.html';
+      return;
+    }
+
+    const produto = listaProdutos[id];
+    imagensProduto = produto.imagens;
+
+    document.title = `${produto.nome} - Idôneos`;
+    document.getElementById('product-name').innerText = produto.nome;
+    document.getElementById('product-price').innerText = `R$ ${produto.preco.toFixed(2).replace('.', ',')}`;
+
+    const carousel = document.getElementById('carousel');
+    imagensProduto.forEach((img, i) => {
+      const imgElement = document.createElement('img');
+      imgElement.src = `produtos/${img}`;
+      imgElement.alt = `${produto.nome} - Imagem ${i + 1}`;
+      if (i === 0) imgElement.classList.add('active');
+      carousel.appendChild(imgElement);
+    });
+
+    if (imagensProduto.length <= 1) {
+      document.querySelector('.prev').style.display = 'none';
+      document.querySelector('.next').style.display = 'none';
+    }
+  }
+
+  function mudarImagem(direcao) {
+    const imagens = document.querySelectorAll('#carousel img');
+    imagens[indexImagem].classList.remove('active');
+    
+    indexImagem += direcao;
+
+    if (indexImagem >= imagens.length) indexImagem = 0;
+    if (indexImagem < 0) indexImagem = imagens.length - 1;
+
+    imagens[indexImagem].classList.add('active');
+  }
+
+  // Carregamento dinâmico dos dados
+  const script = document.createElement('script');
+  script.src = 'produtos_dados.js?v=' + Date.now();
+  script.charset = 'utf-8';
+  script.onload = carregarDetalhes;
+  document.head.appendChild(script);
+</script>
+
+</body>
+</html>
