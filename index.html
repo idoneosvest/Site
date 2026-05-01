@@ -101,29 +101,8 @@
 <div class="container">
   <h2>Produtos</h2>
 
-  <div class="products">
-    
-    <div class="product">
-      <img src="Camisetas/Modelo1.jfif" alt="Camiseta 1">
-      <h3>Camiseta Básica Preta</h3>
-      <p class="price">R$ 49,90</p>
-      <button onclick="comprar('Camiseta Básica Preta')">Comprar</button>
-    </div>
-
-    <div class="product">
-      <img src="Camisetas/modelo2.jfif" alt="Camiseta 2">
-      <h3>Camiseta Azul Premium</h3>
-      <p class="price">R$ 59,90</p>
-      <button onclick="comprar('Camiseta Azul Premium')">Comprar</button>
-    </div>
-
-    <div class="product">
-      <img src="Camisetas/modelo3.jfif" alt="Camiseta 3">
-      <h3>Camiseta Vermelha</h3>
-      <p class="price">R$ 69,90</p>
-      <button onclick="comprar('Camiseta Vermelha')">Comprar</button>
-    </div>
-
+  <div class="products" id="product-container">
+    <!-- Os produtos serão carregados dinamicamente aqui -->
   </div>
 </div>
 
@@ -131,7 +110,49 @@
   © 2026 Idôneos - Todos os direitos reservados
 </footer>
 
+<!-- Importa a lista de produtos -->
+<script src="produtos_dados.js"></script>
+
 <script>
+  function carregarProdutos() {
+    const container = document.getElementById('product-container');
+    
+    try {
+      // listaProdutos vem do arquivo produtos_dados.js
+      if (typeof listaProdutos === 'undefined') {
+        throw new Error('A variável listaProdutos não foi encontrada.');
+      }
+
+      container.innerHTML = ''; // Limpa o container antes de carregar
+
+      listaProdutos.forEach((img, index) => {
+        const productDiv = document.createElement('div');
+        productDiv.className = 'product';
+        
+        const productName = img.split('.')[0]
+          .replace('Modelo', 'Produto ')
+          .replace('modelo', 'Produto ')
+          .replace(/(\d+)/, ' $1') // Adiciona espaço antes de números
+          .trim();
+
+        productDiv.innerHTML = `
+          <img src="produtos/${img}" alt="${productName}">
+          <h3>${productName}</h3>
+          <p class="price">R$ ${((index + 1) * 10 + 39.90).toFixed(2).replace('.', ',')}</p>
+          <button onclick="comprar('${productName}')">Comprar</button>
+        `;
+        
+        container.appendChild(productDiv);
+      });
+    } catch (error) {
+      console.error('Erro ao carregar produtos:', error);
+      container.innerHTML = '<p>Erro ao carregar os produtos. Verifique se o arquivo produtos_dados.js existe.</p>';
+    }
+  }
+
+  // Chama a função ao carregar a página
+  carregarProdutos();
+
   function comprar(produto) {
     alert("Você escolheu: " + produto);
   }
