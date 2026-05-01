@@ -26,21 +26,22 @@ async function main() {
     }
   }
 
-  const principalFiles = fs.readdirSync(produtosDir).filter(f => ['.jpg', '.jpeg', '.png', '.jfif', '.webp'].includes(path.extname(f).toLowerCase()));
-  const detalhesFiles = fs.readdirSync(detalhesDir).filter(f => ['.jpg', '.jpeg', '.png', '.jfif', '.webp'].includes(path.extname(f).toLowerCase()));
+  const getFiles = (dir) => fs.existsSync(dir) ? fs.readdirSync(dir).filter(f => ['.jpg', '.jpeg', '.png', '.jfif', '.webp'].includes(path.extname(f).toLowerCase())) : [];
+  
+  let principalFiles = getFiles(produtosDir);
+  let detalhesFiles = getFiles(detalhesDir);
 
   // Sincronizar
   listaProdutos = listaProdutos.filter(p => principalFiles.includes(p.principal));
   listaProdutos.forEach(p => {
     p.detalhes = (p.detalhes || []).filter(d => detalhesFiles.includes(d));
-    // Auto-detectar por padrão
     const base = path.parse(p.principal).name;
     detalhesFiles.filter(f => f.startsWith(base + '_detalhe')).forEach(d => {
       if (!p.detalhes.includes(d)) p.detalhes.push(d);
     });
   });
 
-  // Novos produtos
+  // Novos
   principalFiles.forEach(f => {
     if (!listaProdutos.find(p => p.principal === f)) {
       const base = path.parse(f).name;
@@ -57,10 +58,13 @@ async function main() {
     console.clear();
     console.log("=== GERENCIADOR DE PRODUTOS (NODE.JS) ===");
     listaProdutos.forEach((p, i) => {
-      console.log(`${i + 1}. ${p.nome} - R$ ${p.preco.toFixed(2)} (Det: ${p.detalhes.length})`);
+      const num = `${i + 1}.`.padEnd(4);
+      const nome = p.nome.padEnd(35);
+      const preco = `R$ ${p.preco.toFixed(2).replace('.', ',')}`.padEnd(15);
+      console.log(`${num} ${nome} | ${preco} | Fotos Detalhes: ${p.detalhes.length}`);
     });
 
-    console.log("\nOpcoes: [Numero] Editar | [S] Salvar | [Q] Sair");
+    console.log("\nOpcoes: [Numero] Editar | [D] Deletar | [S] Salvar | [Q] Sair");
     const opt = (await question("Escolha: ")).toUpperCase();
 
     if (opt === 'S') {
@@ -70,6 +74,28 @@ async function main() {
       break;
     }
     if (opt === 'Q') break;
+
+    if (opt === 'D') {
+        const dIdx = parseInt(await question("Numero do produto para EXCLUIR: ")) - 1;
+        if (listaProdutos[dIdx]) {
+            const p = listaProdutos[dIdx];
+            const conf = (await question(`Tem certeza que deseja excluir '${p.nome}'? (S/N): `)).toUpperCase();
+            if (conf === 'S') {
+                // Deleta arquivos
+                const pPath = path.join(produtosDir, p.principal);
+                if (fs.existsSync(pPath)) fs.unlinkSync(pPath);
+                p.detalhes.forEach(d => {
+                    const dPath = path.join(detalhesDir, d);
+                    if (fs.existsSync(dPath)) fs.unlinkSync(dPath);
+                });
+                // Remove da lista
+                listaProdutos.splice(dIdx, 1);
+                console.log("Produto removido!");
+                await new Promise(r => setTimeout(resolve, 1000));
+            }
+        }
+        continue;
+    }
 
     const idx = parseInt(opt) - 1;
     if (listaProdutos[idx]) {

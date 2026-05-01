@@ -10,7 +10,7 @@ const listaProdutos = [
                      ]
     },
     {
-        "nome":  "Camiseta Básica Preta",
+        "nome":  "Camiseta Preta",
         "preco":  49.9,
         "principal":  "Modelo1.jfif",
         "detalhes":  [
@@ -79,21 +79,5 @@ const listaProdutos = [
                          "feminina_detalhe2.webp",
                          "feminina_detalhe3.webp"
                      ]
-    },
-    {
-        "nome":  "Pink Floyd",
-        "preco":  33.0,
-        "principal":  "Pink Floyd.webp",
-        "detalhes":  [
-                         "Pink Floyd_detalhe1.webp",
-                         "Pink Floyd_detalhe2.webp",
-                         "Pink Floyd_detalhe3.webp"
-                     ]
-    },
-    {
-        "nome":  "pesca",
-        "preco":  21.9,
-        "principal":  "pesca.webp",
-        "detalhes":  null
     }
 ];

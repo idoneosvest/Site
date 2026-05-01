@@ -1,4 +1,4 @@
-# Script Gerenciador de Produtos (Interativo) - Versão com Remoção Individual
+# Script Gerenciador de Produtos (Interativo) - Versão com Exclusão Total
 $caminhoDados = "produtos_dados.js"
 $produtos = @()
 
@@ -72,10 +72,12 @@ while ($true) {
     for ($i = 0; $i -lt $listaFinal.Count; $i++) {
         $p = $listaFinal[$i]
         $qtdDet = $p.detalhes.Count
-        Write-Host ("{0}. {1} - R$ {2:N2} (Det: {3})" -f ($i + 1), $p.nome, $p.preco, $qtdDet)
+        # Alinhamento por colunas: Numero (4), Nome (35), Preco (15)
+        $linha = "{0,-4} {1,-35} | R$ {2,-12:N2} | Fotos Detalhe: {3}" -f ($i + 1), $p.nome, $p.preco, $qtdDet
+        Write-Host $linha
     }
     
-    Write-Host "`nOpcoes: [Numero] Editar | [S] Salvar | [Q] Sair"
+    Write-Host "`nOpcoes: [Numero] Editar | [D] Deletar Produto | [S] Salvar | [Q] Sair"
     $opcao = Read-Host "Escolha uma opcao"
     
     if ($opcao -eq 'S') {
@@ -85,6 +87,25 @@ while ($true) {
         Write-Host "Salvo com sucesso!" -ForegroundColor Green; Start-Sleep 1; break
     }
     elseif ($opcao -eq 'Q') { break }
+    elseif ($opcao -eq 'D') {
+        $delIdx = Read-Host "Digite o NUMERO do produto que deseja EXCLUIR PERMANENTEMENTE"
+        if ($delIdx -match '^\d+$' -and [int]$delIdx -le $listaFinal.Count -and [int]$delIdx -gt 0) {
+            $p = $listaFinal[[int]$delIdx - 1]
+            Write-Host "`nTEM CERTEZA que deseja excluir '$($p.nome)'?" -ForegroundColor Red
+            Write-Host "Isso apagara a foto principal e todas as fotos de detalhes da pasta!" -ForegroundColor Red
+            $conf = Read-Host "(S/N)"
+            if ($conf -eq 'S') {
+                # Remove arquivos físicos
+                if (Test-Path "produtos\$($p.principal)") { Remove-Item "produtos\$($p.principal)" -Force }
+                foreach ($d in $p.detalhes) {
+                    if (Test-Path "produtos\detalhes\$d") { Remove-Item "produtos\detalhes\$d" -Force }
+                }
+                # Remove da lista
+                $listaFinal = $listaFinal | Where-Object { $_.principal -ne $p.principal }
+                Write-Host "Produto e arquivos removidos!" -ForegroundColor Green; Start-Sleep 1
+            }
+        }
+    }
     elseif ($opcao -match '^\d+$' -and [int]$opcao -le $listaFinal.Count -and [int]$opcao -gt 0) {
         $p = $listaFinal[[int]$opcao - 1]
         
@@ -120,6 +141,7 @@ while ($true) {
             }
             elseif ($subOpcao -eq 'A') {
                 Write-Host "`nArquivos disponiveis em 'produtos\detalhes\':"
+                $arquivosDetalhes = Get-ChildItem -Path "produtos\detalhes" -File | Select-Object -ExpandProperty Name
                 $arquivosDetalhes | ForEach-Object { Write-Host " - $_" }
                 $add = Read-Host "`nNome do arquivo para adicionar"
                 if ($arquivosDetalhes -contains $add) {
