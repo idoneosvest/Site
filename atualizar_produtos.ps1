@@ -57,7 +57,7 @@ foreach ($img in $arquivosPrincipais) {
         $nomePadrao = ($img -split '\.')[0] -replace 'Modelo', 'Produto ' -replace 'modelo', 'Produto '
         $nome = Read-Host "Nome do produto (Enter para '$nomePadrao')"
         if ([string]::IsNullOrWhiteSpace($nome)) { $nome = $nomePadrao }
-        $precoStr = Read-Host "Preco (Ex: 49.90)"
+        $precoStr = Read-Host "Preco (Ex: 65.00)"
         $preco = 0.00
         if ($precoStr -match '^\d+([.,]\d+)?$') { $preco = [double]($precoStr -replace ',', '.') }
         
@@ -90,7 +90,7 @@ while ($true) {
         $p = $listaFinal[$i]
         $qtdDet = $p.detalhes.Count
         # Alinhamento por colunas: Numero (4), Nome (35), Preco (15)
-        $linha = "{0,-4} {1,-35} | R$ {2,-12:N2} | Fotos Detalhe: {3}" -f ($i + 1), $p.nome, $p.preco, $qtdDet
+        $linha = "{0,-4} {1,-55} | R$ {2,-12:N2} | Fotos Detalhe: {3}" -f ($i + 1), $p.nome, $p.preco, $qtdDet
         Write-Host $linha
     }
     
