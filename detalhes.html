@@ -86,6 +86,12 @@
               <td>59</td>
               <td id="estoque-ExG">-</td>
             </tr>
+            <tr>
+              <td>G3</td>
+              <td>81</td>
+              <td>61</td>
+              <td id="estoque-G3">-</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -121,7 +127,7 @@
     document.getElementById('product-price').innerText = `R$ ${produto.preco.toFixed(2).replace('.', ',')}`;
 
     // Preencher estoque na tabela de tamanhos
-    const tamanhos = ['PP', 'P', 'M', 'G', 'GG', 'ExG'];
+    const tamanhos = ['PP', 'P', 'M', 'G', 'GG', 'ExG', 'G3'];
     const estoque = produto.estoque || {};
     tamanhos.forEach(t => {
       const el = document.getElementById(`estoque-${t}`);

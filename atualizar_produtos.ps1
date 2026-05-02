@@ -116,6 +116,7 @@ foreach ($img in $arquivosPrincipais)
                 G = 0
                 GG = 0
                 ExG = 0
+                G3 = 0
             }
         }
     }
@@ -211,7 +212,7 @@ function Edit-Product
                 Write-Host "   [$($j + 1)] $($p.detalhes[$j])"
             }
         }
-        Write-Host "4. Estoque: PP:$($p.estoque.PP) P:$($p.estoque.P) M:$($p.estoque.M) G:$($p.estoque.G) GG:$($p.estoque.GG) ExG:$($p.estoque.ExG)"
+        Write-Host "4. Estoque: PP:$($p.estoque.PP) P:$($p.estoque.P) M:$($p.estoque.M) G:$($p.estoque.G) GG:$($p.estoque.GG) ExG:$($p.estoque.ExG) G3:$($p.estoque.G3)"
         
         Write-Host "`nOpcoes de Acao:"
         Write-Host "   [N] Mudar Nome"
@@ -358,6 +359,7 @@ function Edit-Stock($p)
         Write-Host "G: $($p.estoque.G)"
         Write-Host "GG: $($p.estoque.GG)"
         Write-Host "ExG: $($p.estoque.ExG)"
+        Write-Host "G3: $($p.estoque.G3)"
         Write-Host "`n[Tamanho] Novo valor | [V] Voltar"
         $tam = Read-Host "Tamanho ou V"
         # Verifica se é voltar
@@ -366,7 +368,7 @@ function Edit-Stock($p)
             break
         }
         # Verifica se o tamanho é válido
-        if ($tam -in @('PP','P','M','G','GG','ExG'))
+        if ($tam -in @('PP','P','M','G','GG','ExG','G3'))
         {
             $valAtual = $p.estoque.$tam
             $val = Read-Host "Novo estoque para $tam [$valAtual]"

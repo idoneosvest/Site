@@ -61,7 +61,8 @@ async function main() {
           M: 0,
           G: 0,
           GG: 0,
-          ExG: 0
+          ExG: 0,
+          G3: 0
         }
       });
     }
@@ -122,7 +123,7 @@ async function main() {
         console.log(`2. Preco: R$ ${p.preco}`);
         console.log(`3. Detalhes:`);
         p.detalhes.forEach((d, di) => console.log(`   [${di + 1}] ${d}`));
-        console.log(`4. Estoque: PP:${p.estoque.PP} P:${p.estoque.P} M:${p.estoque.M} G:${p.estoque.G} GG:${p.estoque.GG} ExG:${p.estoque.ExG}`);
+        console.log(`4. Estoque: PP:${p.estoque.PP} P:${p.estoque.P} M:${p.estoque.M} G:${p.estoque.G} GG:${p.estoque.GG}  ExG:${p.estoque.ExG} G3:${p.estoque['G3']}`);
 
         console.log("\n[N] Nome | [P] Preco | [E] Estoque | [R] Remover Detalhe | [V] Voltar");
         const sub = (await question("Acao: ")).toUpperCase();
@@ -147,10 +148,11 @@ async function main() {
             console.log(`G: ${p.estoque.G}`);
             console.log(`GG: ${p.estoque.GG}`);
             console.log(`ExG: ${p.estoque.ExG}`);
+            console.log(`G3: ${p.estoque['G3']}`);
             console.log("\n[Tamanho] Novo valor | [V] Voltar");
             const tam = (await question("Tamanho ou V: ")).toUpperCase();
             if (tam === 'V') break;
-            if (tam === 'PP' || tam === 'P' || tam === 'M' || tam === 'G' || tam === 'GG' || tam === 'EXG') {
+            if (tam === 'PP' || tam === 'P' || tam === 'M' || tam === 'G' || tam === 'GG' || tam === 'EXG' || tam === 'G3') {
               const val = await question(`Novo estoque para ${tam}: `);
               const numVal = parseInt(val);
               if (!isNaN(numVal) && numVal >= 0) {

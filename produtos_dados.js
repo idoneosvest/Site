@@ -7,12 +7,13 @@ const listaProdutos = [
                          "NosAmamosPorqueEleNosAmouPrimeiro_azul_detalhes1.jpeg"
                      ],
         "estoque":  {
-                        "ExG":  1,
-                        "G":  2,
+                        "G3":  0,
+                        "ExG":  0,
+                        "G":  4,
                         "GG":  0,
-                        "M":  3,
-                        "P":  1,
-                        "PP":  2
+                        "M":  0,
+                        "P":  0,
+                        "PP":  0
                     }
     },
     {
@@ -23,12 +24,13 @@ const listaProdutos = [
                          "RemidosERestaurados_branca_detalhes.jpeg"
                      ],
         "estoque":  {
-                        "ExG":  3,
-                        "G":  2,
-                        "GG":  1,
-                        "M":  0,
-                        "P":  4,
-                        "PP":  1
+                        "G3":  0,
+                        "ExG":  1,
+                        "G":  1,
+                        "GG":  0,
+                        "M":  3,
+                        "P":  6,
+                        "PP":  5
                     }
     },
     {
@@ -39,12 +41,13 @@ const listaProdutos = [
                          "RemidosERestaurados_preto_detalhes1.jpg"
                      ],
         "estoque":  {
-                        "ExG":  2,
-                        "G":  3,
+                        "G3":  0,
+                        "ExG":  0,
+                        "G":  5,
                         "GG":  1,
-                        "M":  1,
-                        "P":  2,
-                        "PP":  1
+                        "M":  0,
+                        "P":  0,
+                        "PP":  0
                     }
     },
     {
@@ -55,12 +58,13 @@ const listaProdutos = [
                          "RogovosPoisirmaos_braca_detalhes1.jpg"
                      ],
         "estoque":  {
-                        "ExG":  3,
-                        "G":  3,
-                        "GG":  2,
-                        "M":  1,
-                        "P":  0,
-                        "PP":  1
+                        "G3":  0,
+                        "ExG":  0,
+                        "G":  8,
+                        "GG":  1,
+                        "M":  2,
+                        "P":  13,
+                        "PP":  10
                     }
     },
     {
@@ -71,12 +75,13 @@ const listaProdutos = [
                          "PescadoresDeHomens_azul_detalhes1.jpg"
                      ],
         "estoque":  {
-                        "ExG":  1,
-                        "G":  1,
-                        "GG":  2,
-                        "M":  2,
-                        "P":  1,
-                        "PP":  3
+                        "G3":  1,
+                        "ExG":  2,
+                        "G":  6,
+                        "GG":  4,
+                        "M":  5,
+                        "P":  10,
+                        "PP":  0
                     }
     }
 ];
