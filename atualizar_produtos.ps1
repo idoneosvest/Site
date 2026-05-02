@@ -213,7 +213,7 @@ function Edit-Product
         }
         Write-Host "4. Estoque: PP:$($p.estoque.PP) P:$($p.estoque.P) M:$($p.estoque.M) G:$($p.estoque.G) GG:$($p.estoque.GG) ExG:$($p.estoque.ExG)"
         
-        Write-Host "`nOpcoes de Edicao:"
+        Write-Host "`nOpcoes de Acao:"
         Write-Host "   [N] Mudar Nome"
         Write-Host "   [P] Mudar Preco"
         Write-Host "   [E] Editar Estoque"
