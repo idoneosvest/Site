@@ -1,6 +1,7 @@
 # Script Gerenciador de Produtos (Interativo) - Versão com Exclusão Total
 $caminhoDados = "produtos_dados.js"
 $produtos = @()
+$alterada = $false
 
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 
@@ -148,6 +149,8 @@ function Save-Data
     $conteudoFinal = "const listaProdutos = $json;"
     [System.IO.File]::WriteAllText($script:caminhoDados, $conteudoFinal, (New-Object System.Text.UTF8Encoding($false)))
     Write-Host "Salvo com sucesso!" -ForegroundColor Green; Start-Sleep 1
+    # Reseta flag de alterações
+    $script:alterada = $false
 }
 
 function Delete-Product
@@ -178,6 +181,8 @@ function Delete-Product
             }
             $script:listaFinal = $script:listaFinal | Where-Object { $_.principal -ne $p.principal }
             Write-Host "Produto e arquivos removidos!" -ForegroundColor Green; Start-Sleep 1
+            # Marca como alterado
+            $script:alterada = $true
         }
     }
 }
@@ -253,17 +258,33 @@ function Edit-Product
 
 function Change-Name($p)
 {
-    $n = Read-Host "Novo Nome"
-    # Se o nome não estiver vazio, atualiza
-    if ($n)
+    $n = Read-Host "Novo Nome [$($p.nome)]"
+    # Se vazio, mantém o atual
+    if ([string]::IsNullOrWhiteSpace($n))
     {
-        $p.nome = $n
+        $n = $p.nome
     }
+    else
+    {
+        # Marca como alterado
+        $script:alterada = $true
+    }
+    $p.nome = $n
 }
 
 function Change-Price($p)
 {
-    $pr = Read-Host "Novo Preco"
+    $pr = Read-Host "Novo Preco [$($p.preco)]"
+    # Se vazio, mantém o atual
+    if ([string]::IsNullOrWhiteSpace($pr))
+    {
+        $pr = $p.preco.ToString()
+    }
+    else
+    {
+        # Marca como alterado
+        $script:alterada = $true
+    }
     # Valida se o preço é numérico
     if ($pr -match '^\d+')
     {
@@ -284,6 +305,8 @@ function Add-Detail($p)
         if ($p.detalhes -notcontains $add)
         {
             $p.detalhes += $add
+            # Marca como alterado
+            $script:alterada = $true
         }
     }
     else
@@ -301,8 +324,24 @@ function Remove-Detail($p)
         # Valida o índice
         if ($remIdx -match '^\d+$' -and [int]$remIdx -le $p.detalhes.Count -and [int]$remIdx -gt 0)
         {
-            $p.detalhes = $p.detalhes | Where-Object { $_ -ne $p.detalhes[[int]$remIdx - 1] }
-            Write-Host "Foto removida!" -ForegroundColor Green; Start-Sleep 1
+            $fotoParaRemover = $p.detalhes[[int]$remIdx - 1]
+            Write-Host "`nTem certeza que deseja remover '$fotoParaRemover'?" -ForegroundColor Yellow
+            $conf = Read-Host "(S/N)"
+            # Se confirmado, deleta o arquivo e remove da lista
+            if ($conf -eq 'S')
+            {
+                $caminhoArquivo = "produtos\detalhes\$fotoParaRemover"
+                # Verifica se o arquivo existe e remove
+                if (Test-Path $caminhoArquivo)
+                {
+                    Remove-Item $caminhoArquivo -Force
+                    Write-Host "Arquivo removido: $fotoParaRemover" -ForegroundColor Green
+                }
+                $p.detalhes = @($p.detalhes | Where-Object { $_ -ne $fotoParaRemover })
+                Write-Host "Foto removida da lista!" -ForegroundColor Green; Start-Sleep 1
+                # Marca como alterado
+                $script:alterada = $true
+            }
         }
     }
 }
@@ -329,7 +368,18 @@ function Edit-Stock($p)
         # Verifica se o tamanho é válido
         if ($tam -in @('PP','P','M','G','GG','ExG'))
         {
-            $val = Read-Host "Novo estoque para $tam"
+            $valAtual = $p.estoque.$tam
+            $val = Read-Host "Novo estoque para $tam [$valAtual]"
+            # Se vazio, mantém o atual
+            if ([string]::IsNullOrWhiteSpace($val))
+            {
+                $val = $valAtual.ToString()
+            }
+            else
+            {
+                # Marca como alterado
+                $script:alterada = $true
+            }
             # Valida se o valor é numérico
             if ($val -match '^\d+$')
             {
@@ -363,7 +413,23 @@ while ($true)
     # Verifica se a opção é sair
     elseif ($opcao -eq 'Q')
     {
-        break
+        # Se há alterações não salvas, avisa o usuário
+        if ($script:alterada)
+        {
+            Write-Host "`nAVISO: Existem alteracoes nao salvas!" -ForegroundColor Red
+            Write-Host "Deseja sair sem salvar as alteracoes?" -ForegroundColor Yellow
+            $conf = Read-Host "(S/N)"
+            # Se confirmar sair, sai do programa
+            if ($conf -eq 'S')
+            {
+                break
+            }
+            # Se negar, volta ao menu para dar chance de salvar
+        }
+        else
+        {
+            break
+        }
     }
     # Verifica se a opção é deletar
     elseif ($opcao -eq 'D')
