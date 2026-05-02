@@ -154,7 +154,7 @@ button {
 }
 
 button:hover {
-  background: #333;
+  background: rgba(0,0,0,0.6);
 }
 
 .product-details {
@@ -248,7 +248,7 @@ button:hover {
 }
 
 .back-btn:hover {
-  background: #333;
+  background: #8a8989;
 }
 
 footer {
