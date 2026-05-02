@@ -16,7 +16,7 @@ const listaProdutos = [
                     }
     },
     {
-        "nome":  "Remidos e Restaurados",
+        "nome":  "Remidos e Restaurados Branca",
         "preco":  65,
         "principal":  "RemidosERestaurados_branca.jpg",
         "detalhes":  [
@@ -32,19 +32,19 @@ const listaProdutos = [
                     }
     },
     {
-        "nome":  "Remidos e Restaurados",
+        "nome":  "Remidos e Restaurados Preta",
         "preco":  65,
-        "principal":  "RemidosERestaurados_azul.jpg",
+        "principal":  "RemidosERestaurados_preto.jpg",
         "detalhes":  [
-                         "RemidosERestaurados_azul_detalhes1.jpg"
+                         "RemidosERestaurados_preto_detalhes1.jpg"
                      ],
         "estoque":  {
-                        "ExG":  1,
-                        "G":  0,
-                        "GG":  2,
-                        "M":  0,
-                        "P":  3,
-                        "PP":  0
+                        "ExG":  2,
+                        "G":  3,
+                        "GG":  1,
+                        "M":  1,
+                        "P":  2,
+                        "PP":  1
                     }
     },
     {
@@ -79,4 +79,5 @@ const listaProdutos = [
                         "PP":  3
                     }
     }
+    
 ];
