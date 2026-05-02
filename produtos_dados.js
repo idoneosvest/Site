@@ -16,7 +16,7 @@ const listaProdutos = [
                     }
     },
     {
-        "nome":  "Remidos e Restaurados Branca",
+        "nome":  "Remidos e Restaurados Off-White",
         "preco":  65,
         "principal":  "RemidosERestaurados_branca.jpg",
         "detalhes":  [
@@ -48,7 +48,7 @@ const listaProdutos = [
                     }
     },
     {
-        "nome":  "Rogovos pois irmãos",
+        "nome":  "Rogo-vos pois irmãos",
         "preco":  65,
         "principal":  "RogovosPoisirmaos_braca.jpg",
         "detalhes":  [
@@ -79,5 +79,4 @@ const listaProdutos = [
                         "PP":  3
                     }
     }
-    
 ];
