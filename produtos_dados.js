@@ -28,7 +28,7 @@ const listaProdutos = [
                         "GG":  1,
                         "M":  0,
                         "P":  4,
-                        "PP":  0
+                        "PP":  1
                     }
     },
     {

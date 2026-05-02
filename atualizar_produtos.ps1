@@ -140,10 +140,12 @@ while ($true) {
                     Write-Host "   [$($j + 1)] $($p.detalhes[$j])"
                 }
             }
+            Write-Host "4. Estoque: PP:$($p.estoque.PP) P:$($p.estoque.P) M:$($p.estoque.M) G:$($p.estoque.G) GG:$($p.estoque.GG) ExG:$($p.estoque.ExG)"
             
             Write-Host "`nOpcoes de Edicao:"
             Write-Host "   [N] Mudar Nome"
             Write-Host "   [P] Mudar Preco"
+            Write-Host "   [E] Editar Estoque"
             Write-Host "   [A] Adicionar Foto de Detalhe"
             Write-Host "   [R] Remover uma Foto de Detalhe"
             Write-Host "   [V] Voltar ao Menu Principal"
@@ -174,6 +176,33 @@ while ($true) {
                     if ($remIdx -match '^\d+$' -and [int]$remIdx -le $p.detalhes.Count -and [int]$remIdx -gt 0) {
                         $p.detalhes = $p.detalhes | Where-Object { $_ -ne $p.detalhes[[int]$remIdx - 1] }
                         Write-Host "Foto removida!" -ForegroundColor Green; Start-Sleep 1
+                    }
+                }
+            }
+            elseif ($subOpcao -eq 'E') {
+                while ($true) {
+                    Clear-Host
+                    Write-Host "--- EDITANDO ESTOQUE: $($p.nome) ---" -ForegroundColor Yellow
+                    Write-Host "PP: $($p.estoque.PP)"
+                    Write-Host "P: $($p.estoque.P)"
+                    Write-Host "M: $($p.estoque.M)"
+                    Write-Host "G: $($p.estoque.G)"
+                    Write-Host "GG: $($p.estoque.GG)"
+                    Write-Host "ExG: $($p.estoque.ExG)"
+                    Write-Host "`n[Tamanho] Novo valor | [V] Voltar"
+                    $tam = Read-Host "Tamanho ou V"
+                    if ($tam -eq 'V') { break }
+                    if ($tam -in @('PP','P','M','G','GG','ExG')) {
+                        $val = Read-Host "Novo estoque para $tam"
+                        if ($val -match '^\d+$') {
+                            $p.estoque.$tam = [int]$val
+                        } else {
+                            Write-Host "Valor invalido. Deve ser um numero inteiro." -ForegroundColor Red
+                            Start-Sleep 1
+                        }
+                    } else {
+                        Write-Host "Tamanho invalido." -ForegroundColor Red
+                        Start-Sleep 1
                     }
                 }
             }

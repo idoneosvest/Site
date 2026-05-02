@@ -122,8 +122,9 @@ async function main() {
         console.log(`2. Preco: R$ ${p.preco}`);
         console.log(`3. Detalhes:`);
         p.detalhes.forEach((d, di) => console.log(`   [${di + 1}] ${d}`));
+        console.log(`4. Estoque: PP:${p.estoque.PP} P:${p.estoque.P} M:${p.estoque.M} G:${p.estoque.G} GG:${p.estoque.GG} ExG:${p.estoque.ExG}`);
 
-        console.log("\n[N] Nome | [P] Preco | [R] Remover Detalhe | [V] Voltar");
+        console.log("\n[N] Nome | [P] Preco | [E] Estoque | [R] Remover Detalhe | [V] Voltar");
         const sub = (await question("Acao: ")).toUpperCase();
 
         if (sub === 'V') break;
@@ -135,6 +136,34 @@ async function main() {
         if (sub === 'R' && p.detalhes.length > 0) {
           const rIdx = parseInt(await question("Numero do detalhe para remover: ")) - 1;
           if (p.detalhes[rIdx]) p.detalhes.splice(rIdx, 1);
+        }
+        if (sub === 'E') {
+          while (true) {
+            console.clear();
+            console.log(`--- EDITANDO ESTOQUE: ${p.nome} ---`);
+            console.log(`PP: ${p.estoque.PP}`);
+            console.log(`P: ${p.estoque.P}`);
+            console.log(`M: ${p.estoque.M}`);
+            console.log(`G: ${p.estoque.G}`);
+            console.log(`GG: ${p.estoque.GG}`);
+            console.log(`ExG: ${p.estoque.ExG}`);
+            console.log("\n[Tamanho] Novo valor | [V] Voltar");
+            const tam = (await question("Tamanho ou V: ")).toUpperCase();
+            if (tam === 'V') break;
+            if (tam === 'PP' || tam === 'P' || tam === 'M' || tam === 'G' || tam === 'GG' || tam === 'EXG') {
+              const val = await question(`Novo estoque para ${tam}: `);
+              const numVal = parseInt(val);
+              if (!isNaN(numVal) && numVal >= 0) {
+                p.estoque[tam] = numVal;
+              } else {
+                console.log("Valor invalido. Deve ser um numero inteiro nao negativo.");
+                await new Promise(resolve => setTimeout(resolve, 1000));
+              }
+            } else {
+              console.log("Tamanho invalido.");
+              await new Promise(resolve => setTimeout(resolve, 1000));
+            }
+          }
         }
       }
     }
