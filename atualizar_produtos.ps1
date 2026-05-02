@@ -1,4 +1,4 @@
-# Script Gerenciador de Produtos (Interativo) - Versão com Exclusão Total
+# Script Gerenciador de Produtos (Interativo) - Versão com Inicialização Robusta e Detecção Automática
 $caminhoDados = "produtos_dados.js"
 $produtos = @()
 $alterada = $false
