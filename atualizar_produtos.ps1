@@ -134,7 +134,11 @@ function Show-MainMenu
         Write-Host $linha
     }
     
-    Write-Host "`nOpcoes: [Numero] Editar | [D] Deletar Produto | [S] Salvar | [Q] Sair"
+    Write-Host "`nOpcoes:"
+    Write-Host "   [Numero] Editar"
+    Write-Host "   [D] Deletar Produto"
+    Write-Host "   [S] Salvar"
+    Write-Host "   [Q] Sair"
     return Read-Host "Escolha uma opcao"
 }
 
