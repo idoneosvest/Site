@@ -60,11 +60,11 @@ const listaProdutos = [
         "estoque":  {
                         "G3":  0,
                         "ExG":  0,
-                        "G":  8,
+                        "G":  1,
                         "GG":  1,
-                        "M":  2,
-                        "P":  13,
-                        "PP":  10
+                        "M":  1,
+                        "P":  1,
+                        "PP":  1
                     }
     },
     {
@@ -77,9 +77,9 @@ const listaProdutos = [
         "estoque":  {
                         "G3":  1,
                         "ExG":  2,
-                        "G":  6,
+                        "G":  1,
                         "GG":  4,
-                        "M":  5,
+                        "M":  4,
                         "P":  10,
                         "PP":  0
                     }
