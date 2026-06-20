@@ -77,7 +77,7 @@ const listaProdutos = [
         "estoque":  {
                         "G3":  1,
                         "ExG":  2,
-                        "G":  1,
+                        "G":  5,
                         "GG":  4,
                         "M":  4,
                         "P":  10,
